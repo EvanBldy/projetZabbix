@@ -38,7 +38,7 @@ for(( i=0;i<nb_lines;++i )) ; do
     done
     let "date_sec=($(date -d "$YMD $new" +'%s'))-3600"
             
-    mysql -u zabbix --password=$3 -e "INSERT INTO zabbix.history_uint(itemid,clock,value,ns) VALUES ((select itemid from zabbix.items where name like 'power_$1'),$date_sec,$power,0),((select itemid from zabbix.items where name like 'input_voltage_$1'),$date_sec,$input_voltage,0),((select itemid from zabbix.items where name like 'ups_load_$1'),$date_sec,$ups_load,0),((select itemid from zabbix.items where name like 'battery_runtime_$1'),$date_sec,$battery_runtime,0);INSERT INTO zabbix.history(itemid,clock,value,ns) VALUES((select itemid from zabbix.items where name like 'battery_charge_$1'),$date_sec,$battery_charge,0),((select itemid from zabbix.items where name like 'input_frequency_$1'),$date_sec,$input_frequency,0);"
+    mysql -u zabbix --password=$3 -e "INSERT INTO zabbix.history_uint(itemid,clock,value,ns) VALUES ((select itemid from zabbix.items where name like 'input_voltage_$1'),$date_sec,$input_voltage,0),((select itemid from zabbix.items where name like 'ups_load_$1'),$date_sec,$ups_load,0),((select itemid from zabbix.items where name like 'battery_runtime_$1'),$date_sec,$battery_runtime,0);INSERT INTO zabbix.history(itemid,clock,value,ns) VALUES((select itemid from zabbix.items where name like 'battery_charge_$1'),$date_sec,$battery_charge,0),((select itemid from zabbix.items where name like 'input_frequency_$1'),$date_sec,$input_frequency,0),((select itemid from zabbix.items where name like 'power_$1'),$date_sec,$power,0);"
     echo "Ligne $i/$nb_lines PATIENCE !!!!!"
 done
 
